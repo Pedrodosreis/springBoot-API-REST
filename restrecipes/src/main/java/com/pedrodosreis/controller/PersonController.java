@@ -1,6 +1,7 @@
 package com.pedrodosreis.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +60,23 @@ public class PersonController {
 		
 		Person[] person = new Gson().fromJson(string, Person[].class);		
 		repository.save(person[0]);
+			
+		return "";
+	}
+	
+	@RequestMapping(value="/person", method=RequestMethod.PUT)
+	public String updatePerson(@RequestBody String string) {
+		
+		Person[] person = new Gson().fromJson(string, Person[].class);		
+		Person p = person[0];
+		
+		Optional<Person> oldPerson = repository.findById(p.getId());
+		
+		if(oldPerson.isPresent()) {
+			oldPerson.get().setAge(p.getAge());
+			oldPerson.get().setName(p.getName());
+		}
+		repository.save(oldPerson.get());
 			
 		return "";
 	}
