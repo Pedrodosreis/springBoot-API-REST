@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
@@ -28,8 +27,8 @@ public class PersonController {
 	 * 
 	 * 
 	 */
-	@RequestMapping("/getallperson")
-	public String getAllJson() {		
+	@RequestMapping("/person")
+	public String getAllPeople() {		
 		return new Gson().toJson(repository.findAll());
 	}
 	
@@ -40,7 +39,7 @@ public class PersonController {
 	 * 
 	 */
 	@RequestMapping("/person/{name}")
-	public String getJsonByName(@PathVariable("name") String name) {		
+	public String getPeopleByName(@PathVariable("name") String name) {		
 		return new Gson().toJson(repository.findByName(name));
 	}
 	
@@ -50,10 +49,10 @@ public class PersonController {
 	 * http://localhost:8080/person?name='name'
 	 * 
 	 */
-	@RequestMapping("/person")
-	public String getRecipe(@RequestParam(value="name", defaultValue="World") String name) {		
-		return new Gson().toJson(repository.findByName(name));
-	}
+//	@RequestMapping("/person")
+//	public String getRecipe(@RequestParam(value="name", defaultValue="World") String name) {		
+//		return new Gson().toJson(repository.findByName(name));
+//	}
 	
 	@RequestMapping(value="/person", method=RequestMethod.POST)
 	public String addPerson(@RequestBody String string) {
