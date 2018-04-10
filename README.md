@@ -24,3 +24,7 @@ to remove a person on database a simple DELETE on this url:
 
 http://localhost:8080/person/id
 
+to remove all people on database a simple DELETE on this url:
+
+http://localhost:8080/person
+
